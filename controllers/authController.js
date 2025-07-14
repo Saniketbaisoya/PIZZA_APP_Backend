@@ -7,7 +7,7 @@ async function loginUser(req,res) {
         const loginPayload = req.body;
 
         const loginService = await authService(loginPayload);
-
+        console.log(loginService);
         return res.status(200).json({
             success : true,
             message : "Successfully logged with this email....",

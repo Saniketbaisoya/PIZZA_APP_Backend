@@ -11,14 +11,14 @@ async function authService(authDetails){
     // 1. Check if the Registered user with this given email exists or not ?
     console.log(emailDetails);
     console.log(plainPassword);
-    const user = await findUser(emailDetails);
-
+    const user = await findUser({email : authDetails.email});
+    console.log(user.password);
     if(!user){
         throw{reason : "User Not Found with this email ",statusCode : 404};
     }
     // 2. if user found with this email then....
     // We need to compare the plainIncomingPassword with hashpassword(in db)....
-    const isVaildPassword = bcrypt.compare(plainPassword,user.password);
+    const isVaildPassword = await bcrypt.compare(plainPassword,user.password);
 
     if(!isVaildPassword){
         throw{reason : "Invalid Password ,please try again later....", statusCode : 401};
@@ -28,6 +28,7 @@ async function authService(authDetails){
         email : user.email , id : user._id 
     },Secret_Key ,{expiresIn : JWT_EXPIRY});
     
+    console.log("TOKEN Generate : ",token);
     return token;
 }
 

@@ -1,12 +1,13 @@
 const User = require("../schema/schema.js");
 
 
-    async function findUser({paramters}){ 
+    async function findUser(parameters){ 
         console.log("findOne function called....")
 
-        console.log("Recieved the parameters :",paramters);
+        console.log("Recieved the parameters :",parameters);
         try {
-            const response = await User.findOne({...paramters});
+            const response = await User.findOne({...parameters});
+    
             return response;
         } catch (error) {
             console.log(error);
@@ -16,7 +17,8 @@ const User = require("../schema/schema.js");
 
     async function createNewUser(userDetails){
         try {
-            const response = await User.create(userDetails);
+            const user = await User.create(userDetails);
+            const response = await user.save(); 
             return response;
         } catch (error) {
             console.log(error);
