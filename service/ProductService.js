@@ -25,7 +25,10 @@ async function createProduct(productDetails) {
             url = result.secure_url;
             console.log(url);
             // Now cloudinary pr apni image ko upload krke hmne usko immediately delete krdiya and cloudinary se secure_url nikalne ke baad yeah kaam kiya hai....
-            await fs.unlink(imagePath);
+            // Now fs.unlink krne se hmne directly imagepath provide krva diya lekin yeah image path iss service ke folder mai exist nhi krta also the imagePath is exsist into the root directory path so hmme uska path dena hoga fs.unlink ke andrr....
+            // console.log(imagePath,__dirname);
+            console.log(process.cwd() + '/' + imagePath);
+            await fs.unlink(process.cwd() + '/' + imagePath);
         } catch (error) {
             console.log(error);
             throw{reason : "Not able to create the product",statusCode : 500};
