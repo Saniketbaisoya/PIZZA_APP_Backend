@@ -1,5 +1,5 @@
 const userRepository = require("../repository/userRepository.js");
-const User = require("../schema/schema.js");
+const User = require("../schema/productSchema.js");
 const registeredUser = require("../service/userService.js");
 const UserService = require("../service/userService.js");
 

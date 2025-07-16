@@ -1,7 +1,7 @@
 const express = require('express');
 const { PORT } = require('../configuration/serverConfig.js');
 const connectDB = require('../configuration/dbConfig.js');
-const User = require('../schema/schema.js');
+const User = require('../schema/productSchema.js');
 const userRouter = require('../routers/userRouter.js');
 const authRouter = require('../routers/authRouter.js');
 const uploader = require('../middlewares/multerMiddleware.js');

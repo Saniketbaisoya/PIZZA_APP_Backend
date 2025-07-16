@@ -1,4 +1,4 @@
-const User = require("../schema/schema.js");
+const User = require("../schema/productSchema.js");
 
 
     async function findUser(parameters){ 

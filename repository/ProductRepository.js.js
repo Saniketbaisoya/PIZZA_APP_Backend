@@ -1,4 +1,4 @@
-const Product = require("../schema/schema.js");
+const Product = require("../schema/productSchema.js");
 const BadRequestError = require("../utils/badRequestError.js");
 const InternalServerError = require("../utils/internalServerError.js");
 
