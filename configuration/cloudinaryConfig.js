@@ -1,10 +1,13 @@
-const { Cloud_Name, API_Key, API_Secret_Key } = require('./serverConfig');
+const { cloud_name, api_key, api_secret } = require('./serverConfig');
 
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
-    cloud_name: Cloud_Name,
-    api_key: API_Key,
-    api_secret: API_Secret_Key
-})
+    cloud_name: cloud_name,
+    api_key: api_key,
+    api_secret: api_secret
 
+});
+
+
+module.exports = cloudinary;

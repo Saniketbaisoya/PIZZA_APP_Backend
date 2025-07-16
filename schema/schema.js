@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-    ProductName : {
+    productName : {
         type : String,
         required : [true,"Product name is Required"],
         minlength :[5,"Product name atleast 5 characters"],
@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema({
         maxlenght : [15,"Product name atmost 15 characters long"]
     },
 
-    Description : {
+    description : {
         type : String,
         minlength : [5,"Product Description must be atleast 5 characters"],
         maxlenght : [150,`Product name atmost ${150} characters long`]
@@ -25,14 +25,19 @@ const productSchema = new mongoose.Schema({
         type : String,
         enum : ["veg","non-veg","drinks","sides"],
         default : "veg"
+        
     },
     inStock : {
         type : Boolean,
-        required : [true,"inStock status is required"]
+        required : [true,"inStock status is required"],
+        default : true
     },
 },{
     timestamps : true
 });
 
+const Product = mongoose.model("Product",productSchema);
+
+module.exports = Product;
 
 
