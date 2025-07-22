@@ -3,6 +3,7 @@ const fs = require('fs/promises');
 const { create_product, getProductBy_Id, deleteProductBy_Id } = require('../repository/ProductRepository.js');
 const InternalServerError = require("../utils/internalServerError.js");
 const NotFoundError = require("../utils/notFoundError.js");
+const BadRequestError = require("../utils/badRequestError.js");
 //Now createProduct service layer mai ek alg function hai , and jaise repository mai maine sare function ko seperately create kiya hai 
 // aise hi sare different functions like update , delete , create inn sbko bhi seperately hi create krege and sbme seperately buisness logic add hoga...
 // Note : Repository function's or service ke function's dono ke naam different hone chahiye vrna voh import hone ke liye suggest nhi honge....
@@ -31,7 +32,7 @@ async function createProduct(productDetails) {
             await fs.unlink(process.cwd() + '/' + imagePath);
         } catch (error) {
             console.log(error);
-            throw{reason : "Not able to create the product",statusCode : 500};
+            throw new BadRequestError('product');
         }
     }
     const productDataForRepository = {

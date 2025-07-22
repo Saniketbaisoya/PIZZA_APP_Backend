@@ -21,16 +21,18 @@ const productSchema = new mongoose.Schema({
         type : Number,
         required : [true,"Product price is required"]
     },
-    category : {
+    category : { // Now default value enum se phele define krni hai
         type : String,
-        enum : ["veg","non-veg","drinks","sides"],
-        default : "veg"
+        default : "veg",
+        enum : ["veg","non-veg","drinks","sides"]
+        
         
     },
     inStock : {
         type : Boolean,
-        required : [true,"inStock status is required"],
-        default : true
+        default : true,
+        required : [true,"inStock status is required"]
+        
     },
 },{
     timestamps : true

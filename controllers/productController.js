@@ -17,7 +17,7 @@ async function productCreate_Controller(req,res){
         return res.status(200).json({
             success : true,
             message : "Successfully created the product...",
-            data : product_Create_Data,
+            data : {product_Create_Data},
             error : {}
         });
     }catch (error) {
