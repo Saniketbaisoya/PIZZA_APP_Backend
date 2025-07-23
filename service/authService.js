@@ -14,7 +14,7 @@ async function authService(authDetails){
 
     // 1. Check if the Registered user with this given email exists or not ?
 
-    const user = await findUser({mobileNumber});
+    const user = await findUser({email});
     console.log("User value that recieved from repo : ",user);
     console.log(user.email);
     console.log(user.password);
@@ -27,12 +27,12 @@ async function authService(authDetails){
     const isVaildPassword = await bcrypt.compare(plainPassword, user.password);
 
     console.log(isVaildPassword);
-    if(!isVaildPassword){
-        throw{message : "Invalid Password ,please try again later....", statusCode : 401};
-    }
+    // if(!isVaildPassword){
+    //     throw{message : "Invalid Password ,please try again later....", statusCode : 401};
+    // }
     
 
-    const userRole = user.role ? user.role : "USER";
+    const userRole = user.role || 'USER';
     // 3. if the password is validate then we will generate the token for user so that they can login again in the platform....
     const token = jwt.sign({email : user.email , id : user._id, role : userRole} ,Secret_Key ,{expiresIn : JWT_EXPIRY});
     

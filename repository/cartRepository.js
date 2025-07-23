@@ -21,7 +21,7 @@ async function createCart(userId){
 async function findCart(userId){
     // Now agr hmme kisi user ki cart ko fetch krna hai toh voh hmm kr skte hai by {user : userId} -> kyuki isi ko hmne store kiya tha cart create krte time yha normal userId isliye ni di kyuki puri key : value store hui thi toh pure object ke basis pe identify hoga....
     try {
-        const response = Cart.findOne({user : userId});
+        const response = Cart.findOne({user : userId}).populate('items.product');
         return response;
     } catch (error) {
         throw new InternalServerError();
