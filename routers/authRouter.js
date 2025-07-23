@@ -1,5 +1,6 @@
 const express = require('express');
 const loginUser = require('../controllers/authController');
+
 const authRouter = express.Router();
 
 console.log("Request go to the loginUser controller....")

@@ -3,13 +3,15 @@ const { PORT } = require('../configuration/serverConfig.js');
 const connectDB = require('../configuration/dbConfig.js');
 const User = require('../schema/productSchema.js');
 const userRouter = require('../routers/userRouter.js');
-const authRouter = require('../routers/authRouter.js');
+
 const uploader = require('../middlewares/multerMiddleware.js');
 const { cloudinary } = require('../configuration/cloudinaryConfig.js');
 const path = require('path');
 const multer = require('multer');
 const ProductRouter = require('../routers/productRouter.js');
 const cookie = require('cookie-parser');
+const authRouter = require('../routers/authRouter.js');
+const cartRouter = require('../routers/cartRouter.js');
 const app = express(); // express ka empty object express ko call krke aya hai....
 
 app.use(express.json());
@@ -40,6 +42,7 @@ app.use('/auth',authRouter); //  http://localhost:3000/auth -> authRouter -> htt
 
 app.use('/create',ProductRouter);// http://localhost:3000/create/product -> ProductRouter -> productController -> productService 
 
+app.use ('/cart',cartRouter);
 
 
 app.listen(PORT,async ()=>{

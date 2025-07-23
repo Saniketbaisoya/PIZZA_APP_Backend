@@ -1,3 +1,4 @@
+const {createCart} = require("../repository/cartRepository");
 const {findUser,createNewUser} = require("../repository/userRepository");
 // class UserService { // classes based syntaxes ke through serviceLayer define hui...
 
@@ -35,6 +36,9 @@ const {findUser,createNewUser} = require("../repository/userRepository");
         if(!newUser){ // if user is not created , toh phr user ke details mai problem hai jisse voh user create nhi hua and agr voh create hi ni hua toh voh registered hi nhi hoga application architecture prr....
             throw{reason :"Something went wrong, cannot create the user....",statusCode : 500};
         }
+
+        await createCart(newUser._id);
+
        // 3. return the user with this userDetails....
        return newUser;
     }

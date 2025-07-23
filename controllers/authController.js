@@ -1,4 +1,5 @@
-const authService = require("../service/authService.js");
+const authService = require("../service/authService");
+
 
 async function loginUser(req,res) {
     
@@ -31,4 +32,4 @@ async function loginUser(req,res) {
     }
 }
 
-module.exports = loginUser;
+module.exports = loginUser
