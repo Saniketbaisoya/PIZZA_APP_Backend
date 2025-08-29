@@ -4,9 +4,6 @@ const InternalServerError = require("../utils/internalServerError");
 
 
     async function findUser(parameters){ 
-        console.log("findOne function called....")
-
-        console.log("Recieved the parameters :",parameters);
         try {
             const response = await User.findOne({...parameters});
             console.log("findOne function response : ",response);

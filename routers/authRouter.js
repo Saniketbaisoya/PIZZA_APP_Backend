@@ -1,9 +1,7 @@
 const express = require('express');
-const {loginUser} = require('../controllers/authController');
+const {loginUser, loginAdmin} = require('../controllers/authController');
 
 const authRouter = express.Router();
-
-console.log("Request go to the loginUser controller....")
 authRouter.post('/login',loginUser); // this is the authRouter registration....
-
+authRouter.post('/login/admin',loginAdmin) // this is the authRouter for login only the admin user....
 module.exports = authRouter; // exporting the authRouter....

@@ -10,7 +10,7 @@ async function isLoggedIn(req,res,next){
             success : false,
             data : {},
             error : 'Not authenticated',
-            message : 'Not Auth Token is Provided'
+            message : 'Not Auth Token Provided'
         });
     }
     
@@ -60,4 +60,7 @@ function isAdmin(req,res,next){
     
 }
 
-module.exports = {isLoggedIn,isAdmin};
+module.exports = {
+    isLoggedIn,
+    isAdmin
+};
