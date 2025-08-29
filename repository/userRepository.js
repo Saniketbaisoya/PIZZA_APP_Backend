@@ -22,17 +22,16 @@ const InternalServerError = require("../utils/internalServerError");
             const response = await User.create(userDetails);
             return response;
         } catch (error) {
-            // if(error.name == "MoongooseError"){
-            //     throw new InternalServerError();
-            // }else if (error.name == "ValidationError"){
-            //     Object.keys(error.errors).map((property) => {
-            //         return error.errors[property].message;
-            //     })
-            //     throw new BadRequestError();
-            // }
-            // console.log(error);
-            // throw new InternalServerError();
-            throw error;
+            if(error.name == "MoongooseError"){
+                throw new InternalServerError();
+            }else if (error.name == "ValidationError"){
+                Object.keys(error.errors).map((property) => {
+                    return error.errors[property].message;
+                })
+                throw new BadRequestError();
+            }
+            console.log(error);
+            throw new InternalServerError();
         }
     }
 

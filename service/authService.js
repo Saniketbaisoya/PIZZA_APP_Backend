@@ -12,7 +12,6 @@ async function authService(authDetails){
     // 1. Check if the Registered user with this given email exists or not ?
 
     const user = await findUser({ email });
-   console.log(user);
     if(!user){
         throw{message : "No user found with the given email",statusCode : 404};
     }
@@ -20,7 +19,6 @@ async function authService(authDetails){
     // 2. if user found with this email then....
     // We need to compare the plainIncomingPassword with hashpassword(in db)....
     const isPasswordValidated = await bcrypt.compare(plainPasswordToCheck, hashedPasswordOnStorage);
-    console.log(isPasswordValidated);
 
     if(!isPasswordValidated){
         throw {message : "Invalid Password, please try again", statusCode : 401};
