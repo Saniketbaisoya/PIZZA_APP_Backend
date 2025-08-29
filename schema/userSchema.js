@@ -50,12 +50,16 @@ const userSchema = new mongoose.Schema({
     timestamps : true,
 })
 // Now iss case mai hmme , password ko hashing krke aage bejna hai....
-userSchema.pre('save',async function (){
-    console.log("Pre hook function executed after schema....");
-    console.log(this);// Now abhi userSchema ka use krke maine pre hook function create kiya toh this ke liye call site hogya userSchema toh uska pura access this ke andr hoga....
-    const hashPassword = await bcrypt.hash(data = this.password,saltOrRounds =10);
-    this.password = hashPassword;
-    console.log("Exiting the pre hook fucntion....");
+userSchema.pre('save',async function (next){
+    try {
+        // Now abhi userSchema ka use krke maine pre hook function create kiya toh this ke liye call site hogya userSchema toh uska pura access this ke andr hoga....
+        const saltOrRounds = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(this.password,saltOrRounds);
+        this.password = hashPassword;
+        next(); // Proceed to save 
+    }catch (error) {
+        next(error);
+    }
 })
 // userSchema.pre('save', async function (next) {
 //     if (!this.isModified('password')) return next(); // Only hash if password is new/changed
