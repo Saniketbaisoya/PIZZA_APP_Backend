@@ -4,7 +4,7 @@ const AppError = require("../utils/appError");
 async function cartController(req,res){
 
     try {
-        const response = await getCart(req.user.id);
+        const response = await getCart(req.body.userId);
         return res.status(200).json({
             success : true,
             message : "Successfully fetched the cart",

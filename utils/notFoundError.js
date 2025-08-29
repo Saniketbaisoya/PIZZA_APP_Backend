@@ -11,7 +11,7 @@ const AppError = require("./appError");
 // }
 class NotFoundError extends AppError{
 
-    constructor(resource){
+    constructor(resources){
         super(`Not able to find resources ${resources}`,404);
     }
 }

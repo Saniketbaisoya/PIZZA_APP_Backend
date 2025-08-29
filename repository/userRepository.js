@@ -6,7 +6,6 @@ const InternalServerError = require("../utils/internalServerError");
     async function findUser(parameters){ 
         try {
             const response = await User.findOne({...parameters});
-            console.log("findOne function response : ",response);
             return response;
         } catch (error) {
            throw new InternalServerError();

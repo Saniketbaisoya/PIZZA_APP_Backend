@@ -11,11 +11,11 @@ async function getCart(userId){
     return cart;
 }
 
-async function modifyCart(userId,productId,shouldAdd = true){
+async function modifyCart(userId, productId, shouldAdd = true){
     const quantityValue = (shouldAdd==true) ? 1 : -1;
     // userId ke basis pr sbse phele voh cart ko fetch krke layege then productId ka use krke uss product ko fetch krke layege and then uski quantity ko add up krege in the cart that recieve corresponding to userId....
     const cart = getCart(userId);
-    const product = getProductById(productId);
+    const product = await getProductById(productId);
     if(!product){ 
         throw new NotFoundError("product");
     }
@@ -31,7 +31,7 @@ async function modifyCart(userId,productId,shouldAdd = true){
     // Then items.product ke corresponding quantity mai jakrr items.quantity ko +1 se increase kr dege...
     (await cart).items.forEach(item => {
         console.log(item);
-        if(item.product == productId){
+        if(item.product._id == productId){
             if(shouldAdd){
                 if(product.quantity >= item.quantity + 1){
                     item.quantity += quantityValue;
@@ -41,7 +41,13 @@ async function modifyCart(userId,productId,shouldAdd = true){
             }else {
                 if(item.quantity > 0){
                     item.quantity += quantityValue;
-                }else {
+                    if(item.quantity == 0){
+                        cart.items = cart.items.filter(item => item.product._id != productId);
+                        foundProduct = true;
+                        return;
+                    }
+                }
+                else {
                     throw new AppError("The quantity of the item requested is not available ",404)
                 }
             }

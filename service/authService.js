@@ -11,8 +11,8 @@ async function authService(authDetails){
     // 1. Check if the Registered user with this given email exists or not ?
 
     const user = await findUser({ email });
-    if(!user){
-        throw{message : "No user found with the given email",statusCode : 404};
+    if(!user || user.role == "ADMIN"){
+        throw{message : "No user found",statusCode : 404};
     }
     const hashedPasswordOnStorage = user.password;
     // 2. if user found with this email then....
@@ -31,11 +31,10 @@ async function authService(authDetails){
 async function authServiceForAdmin(authDetails){
     const email = authDetails.email;
     const plainPasswordToCheck = authDetails.password;
-    const role = authDetails.role;
 
     // 1. Check if the Registered user with this given email exists or not ?
 
-    const user = await findUser({ email , role});
+    const user = await findUser({ email });
     if( user.role == "USER" ){
         throw{message : "The User is not an ADMIN",statusCode : 401};
     }
