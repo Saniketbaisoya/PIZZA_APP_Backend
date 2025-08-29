@@ -1,7 +1,6 @@
-// const User = require("../schema/productSchema.js");
-const User = require("../schema/userSchema.js");
-const BadRequestError = require("../utils/badRequestError.js");
-const InternalServerError = require("../utils/internalServerError.js");
+const User = require("../schema/userSchema");
+const BadRequestError = require("../utils/badRequestError");
+const InternalServerError = require("../utils/internalServerError");
 
 
     async function findUser(parameters){ 
@@ -20,23 +19,24 @@ const InternalServerError = require("../utils/internalServerError.js");
 
     async function createNewUser(userDetails){
         try {
-            const user = await User.create(userDetails);
-            const response = await user.save(); 
+            const response = await User.create(userDetails);
             return response;
         } catch (error) {
-            if(error.name == "MoongooseError"){
-                throw new InternalServerError();
-            }else if (error.name == "ValidationError"){
-                Object.keys(error.errors).map((property) => {
-                    return error.errors[property].message;
-                })
-                throw new BadRequestError();
-            }
-            console.log(error);
-            throw new InternalServerError();
+            // if(error.name == "MoongooseError"){
+            //     throw new InternalServerError();
+            // }else if (error.name == "ValidationError"){
+            //     Object.keys(error.errors).map((property) => {
+            //         return error.errors[property].message;
+            //     })
+            //     throw new BadRequestError();
+            // }
+            // console.log(error);
+            // throw new InternalServerError();
+            throw error;
         }
     }
 
 module.exports = {
-    findUser , createNewUser
+    findUser, 
+    createNewUser
 }

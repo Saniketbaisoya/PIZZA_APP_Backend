@@ -1,5 +1,5 @@
 const express = require("express");
-const createUser = require("../controllers/userController");
+const {createUser} = require("../controllers/userController");
 
 
 // we have to initialise the router object to add the routes in a new file....
