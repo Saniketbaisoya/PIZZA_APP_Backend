@@ -44,7 +44,7 @@ async function authServiceForAdmin(authDetails){
     const isPasswordValidated = await bcrypt.compare(plainPasswordToCheck, hashedPasswordOnStorage);
 
     if(!isPasswordValidated){
-        throw {message : "Invalid Password, please try again", statusCode : 401};
+        throw {message : "Invalid Password, please try again", statusCode : 404};
     }
     // 3. if the password is validate then we will generate the token for user so that they can login again in the platform....
     const token = jwt.sign({email : user.email , id : user._id, role : user.role} ,Secret_Key,{expiresIn : JWT_EXPIRY});

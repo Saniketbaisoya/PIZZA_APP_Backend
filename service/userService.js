@@ -22,6 +22,7 @@ async function registeredUser(userDetails){
         email : userDetails.email,
         password : userDetails.password
     })
+    console.log(newUser);
     if(!newUser){ // if user is not created , toh phr user ke details mai problem hai jisse voh user create nhi hua and agr voh create hi ni hua toh voh registered hi nhi hoga application architecture prr....
         throw{reason :"Something went wrong, cannot create the user....",statusCode : 500};
     }

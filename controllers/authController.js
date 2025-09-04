@@ -9,7 +9,7 @@ async function loginUser(req,res) {
         // Also yeah token tbhi create hoga jb loginUser ke andr aane vale email or password req.body.data compare kiya jayega and compare bhi tb hoga jb voh email agr exists kregi tb hmm normal password jo email ke sth ayi thi voh and hashPassword dono ko compare krege tb hi
         // agr compare hogye toh token generate kr dege with jwt_expiry and isse phr usse user under expiry login krlega directly without login again with email and password....
         const response = await authService(loginPayload);
-        
+        // cookie section => token : response(token) httpOnly: true krne se ab voh browser cookie pe show nhi hoga...
         res.cookie("token",response,{
             httpOnly: true,
             secure: false,
